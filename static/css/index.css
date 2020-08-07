@@ -1,0 +1,112 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background: #1f1e23;
+}
+header {
+  position: relative;
+  text-align: center;
+  padding: 2rem 0;
+}
+header h1 {
+  font-family: 'NunitoSans-BoldItalic';
+  font-size: 2.4rem;
+  color: #fff;
+  margin: 0;
+}
+header img {
+  position: absolute;
+  left: 2rem;
+  top: 2rem;
+  width: 3rem;
+}
+main {
+  padding: 0 2rem;
+}
+.s-section {
+  position: relative;
+  width: 100%;
+}
+.s-section input {
+  width: 100%;
+  padding-left: 4rem;
+  height: 4rem;
+  line-height: 4rem;
+  font-size: 1.8rem;
+  color: #e6e6e6;
+  background: #2b2a2f;
+  border: none;
+}
+.s-section input::placeholder {
+  color: #e6e6e6;
+  font-size: 1.8rem;
+}
+.s-section i {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  width: 2rem;
+  height: 2rem;
+  background-image: url(../img/search.png);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+section.m-panel h2 {
+  font-size: 2.6rem;
+  color: #fff;
+  margin-top: 2rem;
+  margin-bottom: 2.3rem;
+}
+section.m-panel article {
+  display: flex;
+  flex-wrap: wrap;
+}
+section.m-panel article .m-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  width: 9.5rem;
+  height: 9.5rem;
+  margin-right: 2.5rem;
+  margin-bottom: 2.5rem;
+  background-image: url('https://dummyimage.com/300x300&text=%20');
+  background-size: 100% 100%;
+  position: relative;
+  z-index: 5;
+}
+section.m-panel article .m-item span {
+  text-align: center;
+  color: #fff;
+  font-family: 'Oswald';
+  font-size: 1.5rem;
+}
+section.m-panel article .m-item:nth-child(3n) {
+  margin-right: 0;
+}
+section.m-panel article .m-item:after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  left: 50%;
+  top: -0.5rem;
+  margin-left: -4rem;
+  width: 8rem;
+  height: 0.5rem;
+  background: #37363c;
+  border-radius: 0.1rem;
+  box-shadow: 0 -0.1rem 0.01rem #35363b;
+}
+section.m-panel article .m-item:before {
+  content: '';
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  top: -0.9rem;
+  margin-left: -3rem;
+  width: 6rem;
+  height: 0.3rem;
+  border-radius: 0.1rem 0.1rem 0 0;
+  background: #2b2b30;
+}
