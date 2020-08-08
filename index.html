@@ -32,107 +32,11 @@
         <input placeholder="Seach Music" type="text" />
         <i class="s-icon"></i>
       </section>
-      <section class="m-panel">
-        <h2>Genres</h2>
-        <article>
-          <div class="m-item">
-            <span>
-              DANCE
-            </span>
-            <span>&</span>
-            <span>
-              ELECTRONIC
-            </span>
-          </div>
-          <div class="m-item">
-            <span>CINEMATIC</span>
-          </div>
-          <div class="m-item">
-            <span>HOLIDAY</span>
-          </div>
-          <div class="m-item">
-            <span>
-              DANCE
-            </span>
-            <span>&</span>
-            <span>
-              ELECTRONIC
-            </span>
-          </div>
-          <div class="m-item">
-            <span>CINEMATIC</span>
-          </div>
-          <div class="m-item">
-            <span>HOLIDAY</span>
-          </div>
-          <div class="m-item">
-            <span>
-              DANCE
-            </span>
-            <span>&</span>
-            <span>
-              ELECTRONIC
-            </span>
-          </div>
-          <div class="m-item">
-            <span>CINEMATIC</span>
-          </div>
-        </article>
-      </section>
-      <section class="m-panel">
-        <h2>Moods</h2>
-        <article>
-          <article>
-            <div class="m-item">
-              <span>
-                DANCE
-              </span>
-              <span>&</span>
-              <span>
-                ELECTRONIC
-              </span>
-            </div>
-            <div class="m-item">
-              <span>CINEMATIC</span>
-            </div>
-            <div class="m-item">
-              <span>HOLIDAY</span>
-            </div>
-            <div class="m-item">
-              <span>
-                DANCE
-              </span>
-              <span>&</span>
-              <span>
-                ELECTRONIC
-              </span>
-            </div>
-            <div class="m-item">
-              <span>CINEMATIC</span>
-            </div>
-            <div class="m-item">
-              <span>HOLIDAY</span>
-            </div>
-            <div class="m-item">
-              <span>
-                DANCE
-              </span>
-              <span>&</span>
-              <span>
-                ELECTRONIC
-              </span>
-            </div>
-            <div class="m-item">
-              <span>CINEMATIC</span>
-            </div>
-          </article>
-        </article>
-      </section>
     </main>
 
     <script>
         
-  
+        // 初始化数据
         const data = {
           Genres: [
             {
@@ -211,12 +115,17 @@
             },
           ],
         };
-  
+        /**
+         * @function getHtmlByItem
+         * @param  {Object} item {每一个item的数据}
+         * @return {String} {html代码}
+         */
         function getHtmlByItem(item) {
           let itemKeyAry = item.title.split("&");
           console.log('itemKeyAry: ', itemKeyAry);
           let spans = "";
           let isEmptyClass = ''
+          //   如果没有&就直接渲染一个span
           if (itemKeyAry.length === 1) {
               if(!itemKeyAry[0]){
                 isEmptyClass = 'm-item-null';
@@ -233,14 +142,17 @@
           return `<div class="m-item ${isEmptyClass}">${spans}</div>`;
                   
         }
-  
+        /**
+         * @function render
+         * @return {null} {渲染列表数据}
+         */
         function render() {
+            // 清空当前列表
             document.querySelectorAll('.m-panel').forEach(item =>{
               item.remove()
             })
             let lastHtml = ''
             let panelWidth = document.querySelector('main').clientWidth;
-            console.log('panelWidth: ', panelWidth);
             Object.keys(data).forEach(element => {
               let innerHtml = ``
               let titleHtml = `<h2>${element}</h2>`
@@ -251,7 +163,8 @@
                       innerHtml += getHtmlByItem(item)
                   })    
               }
-              else if(panelWidth < 1000){
+            //   页面长度大于750 就开始分组渲染，初始化每行的数量
+              else if(panelWidth < 930){
                   groupNum =3
               }else if(panelWidth < 1250){
                   groupNum = 4
@@ -266,6 +179,7 @@
               if(needGroup){
                   const result = [];
                   const item = data[element]
+                  //   进行分组，如果当前组没有预设的长度，那么使用空item 填充
                   for(var i=0;i<item.length;i+=groupNum){
                       let _rsItem = item.slice(i,i+groupNum)
                       if(_rsItem.length < groupNum){
@@ -281,7 +195,6 @@
                       let itemSection = ''
                       rsItem.forEach(rsChildItem => {
                           itemSection += getHtmlByItem(rsChildItem)
-                          
                       })
                       innerHtml += `<div class='item-group'>${itemSection}</div>`
                   })
@@ -291,8 +204,7 @@
               document.querySelector('main').innerHTML = document.querySelector('main').innerHTML + section;
             });
         }
-        render()
-
+        // 页面 高度变换监听
         window.onresize = function () {
           setFontSize();
         };
